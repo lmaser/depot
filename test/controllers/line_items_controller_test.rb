@@ -24,10 +24,12 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
     
    # assert_redirected_to line_item_url(LineItem.last)
    follow_redirect!
-    #assert_select 'h2','Your Pragmatic Cart'
+    assert_select 'h2','Your Cart'
     assert_select 'main' do
-    assert_select 'ul' do
-    assert_select 'li', "1 \u00d7 Programming Ruby 1.9" #double quote to escape!
+    assert_select 'tr' do
+    assert_select 'td', "1" #double quote to escape!
+    assert_select 'td', "Programming Ruby 1.9" #double quote to escape!
+    #assert_select 'td', "1 \u00d7 Programming Ruby 1.9" #double quote to escape!
     end 
   end
   end
@@ -44,7 +46,8 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update line_item" do
-    patch line_item_url(@line_item), params: { line_item: { cart_id: @line_item.cart_id, product_id: @line_item.product_id } }
+    patch line_item_url(@line_item), 
+    params: { line_item: {product_id: @line_item.product_id } }
     assert_redirected_to line_item_url(@line_item)
   end
 
