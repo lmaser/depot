@@ -25,10 +25,10 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
    # assert_redirected_to line_item_url(LineItem.last)
    follow_redirect!
     assert_select 'h2','Your Cart'
-    assert_select 'main' do
+    assert_select 'table' do
     assert_select 'tr' do
-    assert_select 'td', "1" #double quote to escape!
-    assert_select 'td', "Programming Ruby 1.9" #double quote to escape!
+    assert_select 'td', "$49.50" #double quote to escape!
+    #assert_select 'td', "Programming Ruby 1.9" #double quote to escape!
     #assert_select 'td', "1 \u00d7 Programming Ruby 1.9" #double quote to escape!
     end 
   end
