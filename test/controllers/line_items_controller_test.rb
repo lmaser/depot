@@ -34,6 +34,19 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
   end
   end
 
+  test "should create line_item via ajax" do
+  assert_difference('LineItem.count') do 
+    post line_items_url, params: {product_id: products(:ruby).id },xhr: true  #xml http resquest post
+  end 
+
+ 
+
+  assert_response :success 
+  #assert_select 'table' do
+  assert_match /<tr class=\\'line-item-highlight/, @response.body
+  #assert_select 'tr.line-item-highlight'
+  #end
+end
 
   test "should show line_item" do
     get line_item_url(@line_item)
