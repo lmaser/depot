@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all
+    @products = Product.all.order(:title) #order always by title in order to avoid a unconsistently ordered catalog on create and update
   end
 
   # GET /products/1
@@ -45,6 +45,12 @@ class ProductsController < ApplicationController
       if @product.update(product_params)
         format.html { redirect_to @product, notice: 'Product was successfully updated.' }
         format.json { render :show, status: :ok, location: @product }
+
+#broadcast
+@products=Product.all.order(:title)
+ActionCable.server.broadcast 'products',
+html: render_to_string('store/index',layout: false)
+
       else
         puts @product.errors.full_messages
         format.html { render :edit }
