@@ -3,6 +3,9 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 .carts {
+ form {
+  display: inline-flex;
+ }
     table {
       border-collapse: collapse;
     }
@@ -32,6 +35,7 @@
       }
     }
     input[type="submit"] {
+     
       background-color: #881;
       border-radius: 0.354em;
       border: solid thin #441;
